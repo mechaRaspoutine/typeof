@@ -8,7 +8,7 @@ function check(input, obj, comment="") {
   cumul += "| `of("+input+")` | " + "`{type:'"+r.type+"', super:'" + r.super + "'}` | " + comment + " |\n";
 }
 
-function test() {
+function tests() {
   console.clear();
 
   cumul += '\n#### Primitives (or wrappers to them)\n\n';
