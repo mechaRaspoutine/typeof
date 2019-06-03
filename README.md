@@ -37,7 +37,7 @@ Alternative for the lame typeof operator
 
  ### Tests
  ```javascript
-primitives (or wrappers to them) -----------
+// primitives (or wrappers to them) -----------
 
 of().type // 'undefined' (super:'primitive')
 of(null).type // 'null' (super:'primitive')
@@ -51,12 +51,12 @@ of(Number("123")).type // 'number' (super:'primitive')
 of("one").type // 'string' (super:'primitive')
 of(new String("one")).type // 'string' (super:'object')
 
-pure objects -----------
+// pure objects -----------
 
 of({}).type // 'object' (super:'object')
 of(new Object()).type // 'object' (super:'object')
 
-arrays, set, map -----------
+// arrays, set, map -----------
 
 of([]).type // 'array' (super:'object')
 of(new Array(1)).type // 'array' (super:'object')
@@ -71,7 +71,7 @@ of((new Set(['a'])).values())).type // 'set iterator' (super:'iterator')
 of((new Map([[1,'a']])).values()).type // 'map iterator' (super:'iterator')
 of("a"[Symbol.iterator]()).type // 'string iterator' (super:'iterator')
 
-functions -----------
+// functions -----------
 
 of(function(){}).type // 'function' (super:'object')
 of(()=>{}).type // 'function' (super:'object')
@@ -80,21 +80,22 @@ of(new Function("")).type // 'function' (super:'object')
 of(function *(){}).type // 'generatorFunction' (super:'generator')
 of((function(){return arguments})()).type // 'arguments' (super:'object')
 
-regexp -----------
+// regexp -----------
 
 of(/a/g).type // 'regexp' (super:'object')
 of(new RegExp("a","g")).type // 'regexp' (super:'object')
 
-errors -----------
+// errors -----------
 
 of(new Error).type // 'error' (super:'object')
 
-misc -----------
+// misc -----------
 
 of(new Date()).type // 'date' (super:'object')
 of(Promise.resolve()).type // 'promise' (super:'object')
 
-Adding/Removing Personnal objects -----------
+// Adding/Removing Personnal objects -----------
+
 function Vector2(x=0,y=0){this.x=x;this.y=y;}
 of.addType(Vector2);
 of(new Vector2()).type // 'vector2' (super:'object')
