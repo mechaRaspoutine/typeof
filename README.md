@@ -23,9 +23,13 @@ Alternative for the lame typeof operator
      }
    }
  ```
- ### 3: Keep only primitives
+ 
+ ### 3: Personnal class
  ```javascript
-   const isPrimitive = data => of(data).super == 'primitive';
-   var tst1 = isPrimitive(5)? tst1.valueOf() : false; // 5
-   var tst2 = isPrimitive(new Number(5))? tst2.valueOf() : false; // false
+ function Vector2(x=0,y=0) {
+   this.x = x;
+   this.y = y;
+ }
+ of.addType(Vector2);
+ console.log(of(new Vector2())); // {type:'vector2', super:'object'}
  ```
