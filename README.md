@@ -9,7 +9,7 @@ Alternative for the lame typeof operator
      console.log('this is a number');
    }
    
-   const isPrimitive = (data) => of(data).super == 'primitive;
+   const isPrimitive = (data) => of(data).super == 'primitive';
    if (isPrimitive(null)) console.log('!!'); // true
    if (isPrimitive(new Number(14))) console.log('!!'); // false
  ```
