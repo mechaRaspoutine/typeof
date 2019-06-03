@@ -18,7 +18,7 @@ Alternative for the lame typeof operator
  ```javascript
    var arr = [1,2,3];
    if (of(arr).type == 'array' || of(arr).super == 'typedarray') {
-     for (i = 0; i < arr.length; i++) {
+     for (var i = 0; i < arr.length; i++) {
        console.log(arr[i]);
      }
    }
