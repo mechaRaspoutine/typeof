@@ -6,7 +6,7 @@
 
 
 /**
- * some exemples: 
+ * Usage: 
  *
  * 1: basic usage
  *   if (of(42).type == 'number') console.log('this is a number');
