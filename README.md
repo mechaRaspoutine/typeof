@@ -36,72 +36,95 @@ Alternative for the lame typeof operator
 
 
  ### Tests
- ```javascript
-// primitives (or wrappers to them) -----------
+ 
+#### Primitives (or wrappers to them)
 
-of().type // 'undefined' (super:'primitive')
-of(null).type // 'null' (super:'primitive')
-of(false).type // 'boolean' (super:'primitive')
-of(new Boolean(1)).type // 'boolean' (super:'object')
-of(5).type // 'number' (super:'primitive')
-of(NaN).type // 'number' (super:'primitive')
-of(Infinity).type // 'number' (super:'primitive')
-of(new Number("123")).type // 'number' (super:'object')
-of(Number("123")).type // 'number' (super:'primitive')
-of("one").type // 'string' (super:'primitive')
-of(new String("one")).type // 'string' (super:'object')
+| input       | result      | comment     |
+|:------------|:------------|:------------|
+| `of()` | `{type:'undefined', super:'primitive'}` |  |
+| `of(undefined)` | `{type:'undefined', super:'primitive'}` |  |
+| `of(null)` | `{type:'null', super:'primitive'}` | null¹ is a primitive |
+| `of(false)` | `{type:'boolean', super:'primitive'}` |  |
+| `of(5)` | `{type:'number', super:'primitive'}` |  |
+| `of(NaN)` | `{type:'number', super:'primitive'}` | IEEE 754 floats include NaN |
+| `of(Infinity)` | `{type:'number', super:'primitive'}` |  |
+| `of(Number("123"))` | `{type:'number', super:'primitive'}` |  |
+| `of("one")` | `{type:'string', super:'primitive'}` |  |
+| `of("9007199254740991n")` | `{type:'bigint', super:'primitive'}` | Firefox 68 / Chrome 67 |
+| `of(BigInt("42"))` | `{type:'bigint', super:'primitive'}` | Firefox 68 / Chrome 67 |
+| `of(new Boolean(1))` | `{type:'boolean', super:'object'}` |  |
+| `of(new String("one"))` | `{type:'string', super:'object'}` |  |
+| `of(new Number("123"))` | `{type:'number', super:'object'}` |  |
 
-// pure objects -----------
+¹ (typeof null) return "object" only for legacy reasons.
 
-of({}).type // 'object' (super:'object')
-of(new Object()).type // 'object' (super:'object')
+#### Basic objects
 
-// arrays, set, map -----------
+| input       | result      | comment     |
+|:------------|:------------|:------------|
+| `of({})` | `{type:'object', super:'object'}` |  |
+| `of(new Object())` | `{type:'object', super:'object'}` |  |
 
-of([]).type // 'array' (super:'object')
-of(new Array(1)).type // 'array' (super:'object')
-of(new Float32Array(1)).type // 'float32array' (super:'typedarray')
-of(new ArrayBuffer(1)).type // 'arraybuffer' (super:'object')
-of(new DataView(new ArrayBuffer(2))).type // 'dataview' (super:'object')
-of(new Set()).type // 'set' (super:'object')
-of(new Map()).type // 'map' (super:'object')
-of(new WeakSet()).type // 'weakset' (super:'object')
-of(new WeakMap()).type // 'weakmap' (super:'object')
-of((new Set(['a'])).values())).type // 'set iterator' (super:'iterator')
-of((new Map([[1,'a']])).values()).type // 'map iterator' (super:'iterator')
-of("a"[Symbol.iterator]()).type // 'string iterator' (super:'iterator')
+#### Arrays, Set, Map, etc
 
-// functions -----------
+| input       | result      | comment     |
+|:------------|:------------|:------------|
+| `of([])` | `{type:'array', super:'object'}` |  |
+| `of(new Array(1))` | `{type:'array', super:'object'}` |  |
+| `of(new Float32Array(1))` | `{type:'float32array', super:'typedarray'}` |  |
+| `of(new ArrayBuffer(1))` | `{type:'arraybuffer', super:'object'}` |  |
+| `of(new DataView(new ArrayBuffer(2)))` | `{type:'dataview', super:'object'}` |  |
+| `of(new Set())` | `{type:'set', super:'object'}` |  |
+| `of(new Map())` | `{type:'map', super:'object'}` |  |
+| `of(new WeakSet())` | `{type:'weakset', super:'object'}` |  |
+| `of(new WeakMap())` | `{type:'weakmap', super:'object'}` |  |
+| `of((new Set(['a'])).values()))` | `{type:'set iterator', super:'iterator'}` |  |
+| `of((new Map([[1,'a']])).values())` | `{type:'map iterator', super:'iterator'}` |  |
+| `of("a"[Symbol.iterator]())` | `{type:'string iterator', super:'iterator'}` |  |
 
-of(function(){}).type // 'function' (super:'object')
-of(()=>{}).type // 'function' (super:'object')
-of(class C {}).type // 'function' (super:'object')
-of(new Function("")).type // 'function' (super:'object')
-of(function *(){}).type // 'generatorFunction' (super:'generator')
-of((function(){return arguments})()).type // 'arguments' (super:'object')
+#### Functions
 
-// regexp -----------
+| input       | result      | comment     |
+|:------------|:------------|:------------|
+| `of(function(){})` | `{type:'function', super:'object'}` |  |
+| `of(()=>{})` | `{type:'function', super:'object'}` |  |
+| `of(class C {})` | `{type:'function', super:'object'}` |  |
+| `of(new Function(""))` | `{type:'function', super:'object'}` |  |
+| `of(function *(){})` | `{type:'generatorFunction', super:'generator'}` |  |
+| `of((function(){return arguments})())` | `{type:'arguments', super:'object'}` |  |
 
-of(/a/g).type // 'regexp' (super:'object')
-of(new RegExp("a","g")).type // 'regexp' (super:'object')
+#### Regexp
 
-// errors -----------
+| input       | result      | comment     |
+|:------------|:------------|:------------|
+| `of(/a/g)` | `{type:'regexp', super:'object'}` |  |
+| `of(new RegExp("a","g"))` | `{type:'regexp', super:'object'}` |  |
 
-of(new Error).type // 'error' (super:'object')
+#### Errors
 
-// misc -----------
+| input       | result      | comment     |
+|:------------|:------------|:------------|
+| `of(new Error)` | `{type:'error', super:'object'}` |  |
 
-of(new Date()).type // 'date' (super:'object')
-of(Promise.resolve()).type // 'promise' (super:'object')
+#### Misc
 
-// Adding/Removing Personnal objects -----------
+| input       | result      | comment     |
+|:------------|:------------|:------------|
+| `of(new Date())` | `{type:'date', super:'object'}` |  |
+| `of(Promise.resolve())` | `{type:'promise', super:'object'}` |  |
 
+#### User Classes
+
+```javascript
 function Vector2(x=0,y=0){this.x=x;this.y=y;}
-of.addType(Vector2);
-of(new Vector2()).type // 'vector2' (super:'object')
-of.removeType(Vector2);
-of(new Vector2()).type // 'object' (super:'object')
+var PersonAnonym = function(name='',age=20){this.name=name;this.age=age;}
 
-of.addType(Vector2,'tic','tac');
-of(new Vector2()).type // 'tic' (super:'tac')
- ```
+of.removeType(Date);
+of.addType(Vector2);
+of.addType(PersonAnonym, 'To be,', 'or not to be');
+```
+| input       | result      | comment     |
+|:------------|:------------|:------------|
+| `of(new Vector2())` | `{type:'vector2', super:'object'}` |  |
+| `of(new Date())` | `{type:'object', super:'object'}` |  |
+| `of(new PersonAnonym())` | `{type:'To be,', super:'or not to be'}` |  |
