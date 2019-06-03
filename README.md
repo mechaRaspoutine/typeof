@@ -23,7 +23,7 @@ Alternative for the lame typeof operator
    }
  ```
  
- ### 3: Personnal class
+ ### 3: User class
  ```javascript
  function Vector2(x=0,y=0) {
    this.x = x;
