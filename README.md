@@ -1,7 +1,6 @@
 # of(x).type == typeof x
 Alternative for the lame typeof operator
 
-
 ## Exemples
 
  ### 1: basic usage
@@ -35,7 +34,7 @@ Alternative for the lame typeof operator
  ```
 
 
- ### Tests
+### Tests
  
 #### Primitives (or wrappers to them)
 
@@ -88,7 +87,9 @@ Alternative for the lame typeof operator
 |:------------|:------------|:------------|
 | `of(function(){})` | `{type:'function', super:'object'}` |  |
 | `of(()=>{})` | `{type:'function', super:'object'}` |  |
+| `of(new (function(){}))` | `{type:'object', super:'object'}` |  |
 | `of(class C {})` | `{type:'function', super:'object'}` |  |
+| `of(new (class {constructor(){}}))` | `{type:'object', super:'object'}` |  |
 | `of(new Function(""))` | `{type:'function', super:'object'}` |  |
 | `of(function *(){})` | `{type:'generatorFunction', super:'generator'}` |  |
 | `of((function(){return arguments})())` | `{type:'arguments', super:'object'}` |  |
@@ -104,7 +105,8 @@ Alternative for the lame typeof operator
 
 | input       | result      | comment     |
 |:------------|:------------|:------------|
-| `of(new Error)` | `{type:'error', super:'object'}` |  |
+| `of(new Error("error"))` | `{type:'error', super:'object'}` |  |
+| `of(new TypeError("type error"))` | `{type:'error', super:'object'}` |  |
 
 #### Misc
 
@@ -128,3 +130,4 @@ of.addType(PersonAnonym, 'To be,', 'or not to be');
 | `of(new Vector2())` | `{type:'vector2', super:'object'}` |  |
 | `of(new Date())` | `{type:'object', super:'object'}` | because removed above |
 | `of(new PersonAnonym())` | `{type:'To be,', super:'or not to be'}` |  |
+
