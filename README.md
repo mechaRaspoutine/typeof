@@ -126,5 +126,5 @@ of.addType(PersonAnonym, 'To be,', 'or not to be');
 | input       | result      | comment     |
 |:------------|:------------|:------------|
 | `of(new Vector2())` | `{type:'vector2', super:'object'}` |  |
-| `of(new Date())` | `{type:'object', super:'object'}` |  |
+| `of(new Date())` | `{type:'object', super:'object'}` | because removed above |
 | `of(new PersonAnonym())` | `{type:'To be,', super:'or not to be'}` |  |
