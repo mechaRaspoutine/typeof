@@ -23,8 +23,8 @@ function test() {
   check('Infinity', Infinity); // number
   check('Number("123")', Number('123')); // number
   check('"one"', 'one'); // string
-  check('"9007199254740991n"', 9007199254740991n, "Firefox 68 / Chrome 67"); // bigint
-  check('BigInt("42")', BigInt("42"), "Firefox 68 / Chrome 67"); // bigint
+  //check('"9007199254740991n"', 9007199254740991n, "Firefox 68 / Chrome 67"); // bigint
+  //check('BigInt("42")', BigInt("42"), "Firefox 68 / Chrome 67"); // bigint
   check('new Boolean(1)', new Boolean(1)); // boolean
   check('new String("one")', new String('one')); // string
   check('new Number("123")', new Number('123')); // number
