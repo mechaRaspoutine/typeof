@@ -1,6 +1,6 @@
 
 /**
- * Extension of typeof broken function
+ * Alternative for the lame typeof operator
  * Liscence: public domain
  */
 
