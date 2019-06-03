@@ -1,9 +1,9 @@
- 
+      
 'use strict';
 
 function check(str, obj) {
   var r = of(obj);
-  console.log("of("+str+").type == '" + r.type + "' (super:'" + r.super + "')");
+  console.log("of("+str+").type // '" + r.type + "' (super:'" + r.super + "')");
 }
 
 function test() {
@@ -46,8 +46,7 @@ function test() {
   check('class C {}', class C {}); // function
   check('new Function("")', new Function("")); // function
   check('function *(){}', function *(){}); // generatorfunction
-  function fun() { check(arguments + '', arguments) } // arguments
-  fun('a','b','c');
+  check('(function(){return arguments})()', (function(){return arguments})()); // arguments
 
   console.warn('regexp -----------');
   check('/a/g', /a/g); // regexp
@@ -61,15 +60,17 @@ function test() {
   check('Promise.resolve()', Promise.resolve()); // promise
 
   console.warn('Adding Personnal objects -----------');
-
-  function Vector(x=0,y=0) { this.x = x; this.y = y; }
-  console.log("of.addType(Vector);");
-  of.addType(Vector);
-  check('new Vector()', new Vector()); // vector
-  of.removeType(Vector);
-  console.log("of.removeType(Vector);");
-  check('new Vector()', new Vector()); // object
-  console.log("of.addType(Vector,'tic','tac');");
-  of.addType(Vector, "tic", "tac");
-  check('new Vector()', new Vector()); // tic
+  function Vector2(x=0, y=0) {
+    this.x = x;
+    this.y = y;
+  }
+  console.log("of.addType(Vector2);");
+  of.addType(Vector2);
+  check('new Vector2()', new Vector2()); // vector
+  of.removeType(Vector2);
+  console.log("of.removeType(Vector2);");
+  check('new Vector2()', new Vector2()); // object
+  console.log("of.addType(Vector2,'tic','tac');");
+  of.addType(Vector2, "tic", "tac");
+  check('new Vector2()', new Vector2()); // tic
 }
