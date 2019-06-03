@@ -8,9 +8,10 @@ Alternative for the lame typeof operator
    if (of(42).type == 'number') {
      console.log('this is a number');
    }
-   if (of(new Number(42)).type == 'number')) {
-     console.log('this is also a number');
-   }
+   
+   const isPrimitive = (data) => of(data).super == 'primitive;
+   if (isPrimitive(null)) console.log('!!'); // true
+   if (isPrimitive(new Number(14))) console.log('!!'); // false
  ```
  
  ### 2: keep only array or typedarray
