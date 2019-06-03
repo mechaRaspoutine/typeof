@@ -67,8 +67,8 @@ of(new Set()).type // 'set' (super:'object')
 of(new Map()).type // 'map' (super:'object')
 of(new WeakSet()).type // 'weakset' (super:'object')
 of(new WeakMap()).type // 'weakmap' (super:'object')
-of([object Set Iterator]).type // 'set iterator' (super:'iterator')
-of(new Map([[1,'a']])).type // 'map iterator' (super:'iterator')
+of((new Set(['a'])).values())).type // 'set iterator' (super:'iterator')
+of((new Map([[1,'a']])).values()).type // 'map iterator' (super:'iterator')
 of("a"[Symbol.iterator]()).type // 'string iterator' (super:'iterator')
 
 functions -----------
@@ -78,7 +78,9 @@ of(()=>{}).type // 'function' (super:'object')
 of(class C {}).type // 'function' (super:'object')
 of(new Function("")).type // 'function' (super:'object')
 of(function *(){}).type // 'generatorFunction' (super:'generator')
-of([object Arguments]).type // 'arguments' (super:'object')
+function fun() {
+  of(arguments).type // 'arguments' (super:'object')
+}
 
 regexp -----------
 
