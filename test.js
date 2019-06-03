@@ -1,11 +1,10 @@
-      
+ 
 'use strict';
 
 function check(str, obj) {
   var r = of(obj);
   console.log("of("+str+").type == '" + r.type + "' (super:'" + r.super + "')");
 }
-
 
 function test() {
   console.clear();
@@ -37,10 +36,8 @@ function test() {
   check('new Map()', new Map()); // map
   check('new WeakSet()', new WeakSet()); // weakset
   check('new WeakMap()', new WeakMap()); // weakmap
-  var s = new Set(['a']);
-  check(s.values()+"", s.values());
-  var m = new Map([[1,'a']]);
-  check("new Map([[1,'a']])", m.values());
+  check("(new Set(['a'])).values())", (new Set(['a'])).values());
+  check("(new Map([[1,'a']])).values()", (new Map([[1,'a']])).values());
   check('"a"[Symbol.iterator]()', "a"[Symbol.iterator]());
 
   console.warn('functions -----------');
@@ -75,5 +72,4 @@ function test() {
   console.log("of.addType(Vector,'tic','tac');");
   of.addType(Vector, "tic", "tac");
   check('new Vector()', new Vector()); // tic
-
 }
