@@ -78,9 +78,7 @@ of(()=>{}).type // 'function' (super:'object')
 of(class C {}).type // 'function' (super:'object')
 of(new Function("")).type // 'function' (super:'object')
 of(function *(){}).type // 'generatorFunction' (super:'generator')
-function fun() {
-  of(arguments).type // 'arguments' (super:'object')
-}
+of((function(){return arguments})()).type // 'arguments' (super:'object')
 
 regexp -----------
 
@@ -97,12 +95,12 @@ of(new Date()).type // 'date' (super:'object')
 of(Promise.resolve()).type // 'promise' (super:'object')
 
 Adding/Removing Personnal objects -----------
+function Vector2(x=0,y=0){this.x=x;this.y=y;}
+of.addType(Vector2);
+of(new Vector2()).type // 'vector2' (super:'object')
+of.removeType(Vector2);
+of(new Vector2()).type // 'object' (super:'object')
 
-of.addType(Vector);
-of(new Vector()).type // 'vector' (super:'object')
-of.removeType(Vector);
-of(new Vector()).type // 'object' (super:'object')
-
-of.addType(Vector,'tic','tac');
-of(new Vector()).type // 'tic' (super:'tac')
+of.addType(Vector2,'tic','tac');
+of(new Vector2()).type // 'tic' (super:'tac')
  ```
