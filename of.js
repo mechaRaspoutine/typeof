@@ -4,47 +4,8 @@
  * Liscence: public domain
  */
 
-
-/**
- * Usage: 
- *
- * 1: basic usage
- *   if (of(42).type == 'number') console.log('this is a number');
- *   if (of(new Number(42)).type == 'number')) console.log('this is also a number');
- *
- * 2: keep only array or typedarray
- *   var arr = [1,2,3];
- *   if (of(arr).type == 'array' || of(arr).super == 'typedarray') {
- *     for (i = 0; i < arr.length; i++) console.log(arr[i]);
- *   }
- *
- * 3: Keep only primitives
- *   const isPrimitive = data => of(data).super == 'primitive';
- *   var tst1 = isPrimitive(5)? tst1.valueOf() : false; // 5
- *   var tst2 = isPrimitive(new Number(5))? tst2.valueOf() : false; // false
- */
-
 const of = (function(){
   "use strict";
-
-  // --------------------------------------
-  // The latest ECMAScript standard defines eight data types:
-  // 
-  //     Seven data types that are primitives:
-  //         - Boolean. true and false.
-  //         - null. A special keyword denoting a null value.
-  //           Because JavaScript is case-sensitive,
-  //           null is not the same as Null, NULL, or any other variant.
-  //         - undefined. A top-level property whose value is not defined.
-  //         - Number. An integer or floating point number.
-  //           For example: 42 or 3.14159.
-  //         - BigInt. An integer with arbitrary precision.
-  //           For example: 9007199254740992n.
-  //         - String. A sequence of characters that represent a text value.
-  //           For example: "Howdy"
-  //         - Symbol (new in ECMAScript 2015). A data type whose
-  //           instances are unique and immutable.
-  //     and Object
 
   const TYPES = {
     // primitives
@@ -157,11 +118,9 @@ const of = (function(){
     if (TYPES[name]) delete(TYPES[name]);
   };
 
-
   return of;
 })();
 
 
 // export {of}; // uncomment if used as module
-
 
