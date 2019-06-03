@@ -1,4 +1,4 @@
-# typeof
+# of(x).type == typeof x
 Alternative for the lame typeof operator
 
 
